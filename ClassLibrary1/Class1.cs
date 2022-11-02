@@ -6,44 +6,59 @@ using System.Threading.Tasks;
 
 namespace ClassLibrary1
 {
-     public delegate void FullName(string fullname);
-    public class Class1
+     
+    public class AccountBank
     {
+        public delegate void AccountHand(AccountBank send, AccountEventArgs e);
+        public event AccountHand Notify;
+
         public int sum;
         public string name;
-        FullName taken;
-        public void reg(FullName fullname)
-        {
+        AccountHand taken;
 
+        public void reg(AccountHand account, AccountEventArgs e)
+        {
+            taken = account;
         }
-        public void A(int sum, ListBox listbox)
+        public void Add(int sum)
         {
             if (this.sum >= sum)
             {
                 this.sum -= sum;
-                listbox.Items.Add($"Осталось:{ this.sum}");
+                Notify?.Invoke(this, new AccountEventArgs($"На счет пришло {sum}, на балансе:", this.sum));
             }
             else
             {
-                listbox.Items.Add($"Мало денег");
+                Notify?.Invoke(this, new AccountEventArgs($"Мало {sum}, на балансе:", this.sum));
             }
 
         }
 
-        public void B(int sum, ListBox listBox)
+        public void Delete(int sum)
         {
             this.sum += sum;
-            listBox.Items.Add($"Деньги: {this.sum}");
+            Notify?.Invoke(this, new AccountEventArgs($"Пришло {sum}. Баланс", this.sum));
 
         }
-        public void FullName(int sum, string name)
+        public void Account(int sum, string name)
         {
-            this.sum = sum;
             this.name = name;
+            this.sum = sum;
         }
-        public void Delete(FullName a)
+        public void Delete(AccountHand a)
         {
-            taken -= a;
+            taken -= account;
+        }
+        
+        class AccountEventArgs
+        {
+            public string Message { get; }
+            public int Sum { get; }
+
+            public AccountEventArgs(string mes, int sum)
+            {
+
+            }
         }
     }
 }
