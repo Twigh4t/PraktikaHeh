@@ -18,7 +18,7 @@ namespace PraktikaHeh
        
         void DisplayMessage(AccountBank send, AccountEventArgs e)
         {
-            MessageBox.Show($"Сумма {e.sum} {e.message}");
+            MessageBox.Show($"Сумма {e.sum} {e.mes}");
         }
         public Form1()
         {

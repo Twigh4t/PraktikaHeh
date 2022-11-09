@@ -57,7 +57,7 @@ namespace ClassLibrary1
 
             public AccountEventArgs(string mes, int sum)
             {
-
+                public string mes;
             }
         }
     }
