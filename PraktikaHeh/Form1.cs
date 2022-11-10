@@ -15,10 +15,9 @@ namespace PraktikaHeh
     public partial class Form1 : Form
     {
         AccountBank account;
-       
         void DisplayMessage(AccountBank send, AccountEventArgs e)
         {
-            MessageBox.Show($"Сумма {e.sum} {e.mes}");
+            MessageBox.Show($"Сумма {e.Sum} {e.Message}");
         }
         public Form1()
         {
@@ -33,12 +32,12 @@ namespace PraktikaHeh
 
         private void button2_Click(object sender, EventArgs e)
         {
-            account.Add(Convert.ToInt32(textBox3.Text), listBox1);
+            account.Add(Convert.ToInt32(textBox3.Text));
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Account.B(Convert.ToInt32(textBox3.Text));
+            account.Delete(Convert.ToInt32(textBox3.Text));
         }
 
         private void Form1_Load(object sender, EventArgs e)
